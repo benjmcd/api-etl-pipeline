@@ -2,6 +2,14 @@
 
 MVP ETL spine for SEC EDGAR and NRC ADAMS APS based on `docs/Golden_Record_API_Dossiers.md`.
 
+offline default uses fixtures only
+
+--live enables network
+
+SEC live requires SEC_USER_AGENT
+
+NRC live requires subscription key env var
+
 ## Install
 
 ```bash
