@@ -1,88 +1,61 @@
-# =========================
-# Secrets / local config
-# =========================
-.env
-.env.*
-!.env.example
+# --------------------
+# Python / tooling
+# --------------------
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
 
-# =========================
-# Python virtualenvs
-# =========================
 .venv/
 venv/
 ENV/
 env/
-.conda/
-__pypackages__/
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
+build/
+dist/
 
-# =========================
-# Python bytecode / caches
-# =========================
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
-.pytype/
-.pyre/
 .coverage
-.coverage.*
+coverage.xml
 htmlcov/
-.cache/
 
-# =========================
-# Build / packaging
-# =========================
-build/
-dist/
-*.egg-info/
-.eggs/
-pip-wheel-metadata/
-*.whl
+# --------------------
+# Local env / secrets
+# --------------------
+.env
+.env.*
+!.env.example
 
-# =========================
-# Project runtime outputs (ETL artifacts)
-# =========================
+# --------------------
+# Runtime outputs (this project)
+# --------------------
 data/
-artifacts/
 blobs/
-downloads/
-out/
-tmp/
-logs/
-*.log
-
-# Databases (local dev)
+.local_data/
+*.db
 *.sqlite
 *.sqlite3
-*.db
-*.duckdb
+*.wal
+*.shm
 
-# =========================
-# Jupyter / notebooks
-# =========================
-.ipynb_checkpoints/
+# If you keep the DB at repo root sometimes
+api_etl_pipeline.db
 
-# =========================
-# OS / editor
-# =========================
+# --------------------
+# OS junk
+# --------------------
 .DS_Store
 Thumbs.db
-.idea/
-.vscode/
-*.swp
-*.swo
 
-# =========================
+# --------------------
 # Node (if ever added later)
-# =========================
+# --------------------
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-# Configurable runtime locations
-api_etl_pipeline.db
