@@ -83,3 +83,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Configurable runtime locations
+api_etl_pipeline.db
