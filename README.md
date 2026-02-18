@@ -2,52 +2,59 @@
 
 MVP ETL spine for SEC EDGAR and NRC ADAMS APS based on `docs/Golden_Record_API_Dossiers.md`.
 
-offline default uses fixtures only
+## Execution modes
 
---live enables network
-
-SEC live requires SEC_USER_AGENT
-
-NRC live requires subscription key env var
+- **Offline mode is the default** and uses local fixtures only (no HTTP).
+- Use **`--live` explicitly** to enable network calls.
 
 ## Install
 
 ```bash
-python -m pip install -e .[dev]
+python -m pip install -e ".[dev]"
 ```
 
-## Offline mode (default)
+## Environment contract
 
-Offline is the default execution mode and uses local fixtures only (no network calls).
+Optional storage and logging settings:
+
+- `APP_DB_PATH` (default: `./data/api_etl_pipeline.db`)
+- `APP_BLOB_DIR` (default: `./blobs`)
+- `LOG_LEVEL` (default: `INFO`)
+
+Required for live SEC:
+
+- `SEC_USER_AGENT` (sent as `User-Agent`)
+
+Required for live NRC:
+
+- `NRC_SUBSCRIPTION_KEY` **or** `NRC_APS_SUBSCRIPTION_KEY`
+
+Optional live rate limits (requests per second):
+
+- `SEC_MAX_RPS` (default: `2`)
+- `NRC_MAX_RPS` (default: `2`)
+
+See `.env.example` for all supported variables.
+
+## Run
+
+Offline (default):
 
 ```bash
 python -m api_etl_pipeline.cli run --provider sec_edgar
 python -m api_etl_pipeline.cli run --provider nrc_adams_aps
 ```
 
-Optional storage environment variables:
-
-- `APP_DB_PATH` (default: `./data/api_etl_pipeline.db`)
-- `APP_BLOB_DIR` (default: `./blobs`)
-
-## Required env vars for live mode
-
-- `SEC_USER_AGENT` (required for SEC requests; sent as `User-Agent`)
-- `NRC_SUBSCRIPTION_KEY` or `NRC_APS_SUBSCRIPTION_KEY` (APS key, read from env only)
-
-SEC requests always include `User-Agent` and `Accept-Encoding: gzip, deflate` in live mode.
-
-## Live mode (explicit only)
-
-Live HTTP calls are disabled unless `--live` is explicitly provided.
+Live (HTTP enabled only when `--live` is provided):
 
 ```bash
 python -m api_etl_pipeline.cli run --provider sec_edgar --live
 python -m api_etl_pipeline.cli run --provider nrc_adams_aps --live
 ```
 
-## Test
+## Test and lint
 
 ```bash
-pytest
+ruff check .
+pytest -q
 ```
