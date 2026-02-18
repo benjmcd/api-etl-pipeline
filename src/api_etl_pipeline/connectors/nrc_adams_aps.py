@@ -17,7 +17,7 @@ class NrcAdamsApsConnector(BaseConnector):
         metadata: list[dict] = []
         responses: list[CapturedResponse] = []
         for item in plan:
-            url = "https://api.nrc.gov/adamswebsearch/api/v1/search"
+            url = "https://adams-api.nrc.gov/adamswebsearch/api/v1/search"
             captured = self.http.get(
                 url,
                 provider=self.provider,
