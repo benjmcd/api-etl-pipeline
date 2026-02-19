@@ -20,13 +20,13 @@ class BaseConnector(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def fetch_metadata(self, plan: list[dict]) -> tuple[list[dict], list[CapturedResponse]]:
+    def fetch_metadata_item(self, item: dict, item_index: int) -> tuple[dict, CapturedResponse]:
         raise NotImplementedError
 
     @abstractmethod
-    def download_artifacts(
-        self, metadata: list[dict]
-    ) -> list[tuple[ArtifactTarget, CapturedResponse]]:
+    def download_artifact(
+        self, metadata_item: dict, item_index: int
+    ) -> tuple[ArtifactTarget, CapturedResponse] | None:
         raise NotImplementedError
 
     @abstractmethod
